@@ -117,9 +117,20 @@ socialCards.forEach(card => {
     socialObserver.observe(card);
 });
 
-// Initialize first section as active
+// Initialize sections
 document.addEventListener('DOMContentLoaded', () => {
     sections[0].classList.add('active');
+
+    // On mobile, immediately activate ALL sections so none are stuck invisible.
+    // The observer approach is unreliable on mobile with tall sections.
+    if (isMobile()) {
+        sections.forEach(section => {
+            section.classList.add('active');
+            section.style.opacity = '1';
+            section.style.transform = 'none';
+        });
+    }
+
     fetchDiscordStatus();
 });
 
