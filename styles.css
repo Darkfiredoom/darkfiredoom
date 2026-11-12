@@ -544,6 +544,11 @@ body {
     box-shadow: 0 20px 40px rgba(241, 100, 54, 0.3);
 }
 
+.social-card.steam:hover {
+    border-color: #171a21;
+    box-shadow: 0 20px 40px rgba(23, 26, 33, 0.3);
+}
+
 .social-icon {
     width: 60px;
     height: 60px;
