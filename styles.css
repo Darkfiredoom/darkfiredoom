@@ -539,6 +539,11 @@ body {
     box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
 }
 
+.social-card.curseforge:hover {
+    border-color: #f16436;
+    box-shadow: 0 20px 40px rgba(241, 100, 54, 0.3);
+}
+
 .social-icon {
     width: 60px;
     height: 60px;
