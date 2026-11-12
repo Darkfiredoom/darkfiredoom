@@ -66,6 +66,8 @@ window.addEventListener('scroll', () => {
 
 // Add stagger animation to project cards
 const projectCards = document.querySelectorAll('.project-card');
+const isMobile = window.innerWidth <= 768;
+
 const projectObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
@@ -78,9 +80,11 @@ const projectObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 
 projectCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    if (!isMobile) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    }
     projectObserver.observe(card);
 });
 
@@ -98,9 +102,11 @@ const socialObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 
 socialCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    if (!isMobile) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    }
     socialObserver.observe(card);
 });
 
