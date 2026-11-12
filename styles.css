@@ -678,6 +678,10 @@ body {
 
     .project-card {
         padding: 1.5rem;
+        background: var(--card-bg) !important;
+        border: 1px solid var(--card-border) !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
     }
 
     .project-image {
@@ -704,6 +708,10 @@ body {
 
     .social-card {
         padding: 1.5rem;
+        background: var(--card-bg) !important;
+        border: 1px solid var(--card-border) !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
     }
 
     .social-icon {
