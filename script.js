@@ -4,8 +4,8 @@ const navLinks = document.querySelectorAll('.nav-link');
 
 const observerOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.3
+    rootMargin: '-50px 0px',
+    threshold: 0.1
 };
 
 const sectionObserver = new IntersectionObserver((entries) => {
@@ -66,24 +66,29 @@ window.addEventListener('scroll', () => {
 
 // Add stagger animation to project cards
 const projectCards = document.querySelectorAll('.project-card');
-const isMobile = window.innerWidth <= 768;
+
+function isMobile() {
+    return window.innerWidth <= 768;
+}
 
 const projectObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.2 });
+}, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
 
 projectCards.forEach(card => {
-    if (!isMobile) {
+    if (!isMobile()) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    } else {
+        // On mobile, ensure cards are always visible
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
     }
     projectObserver.observe(card);
 });
@@ -91,21 +96,23 @@ projectCards.forEach(card => {
 // Add stagger animation to social cards
 const socialCards = document.querySelectorAll('.social-card');
 const socialObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.2 });
+}, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
 
 socialCards.forEach(card => {
-    if (!isMobile) {
+    if (!isMobile()) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    } else {
+        // On mobile, ensure cards are always visible
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
     }
     socialObserver.observe(card);
 });

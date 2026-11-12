@@ -613,6 +613,10 @@ body {
     .section {
         padding: 5rem 1rem 2rem;
         min-height: auto;
+        /* On mobile, sections should always be visible — the tall sections
+           may never reach the observer threshold, so force them active */
+        opacity: 1;
+        transform: none;
     }
 
     .section-content {
@@ -686,7 +690,8 @@ body {
         background: var(--card-bg) !important;
         border: 1px solid var(--card-border) !important;
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: none !important;
+        visibility: visible !important;
     }
 
     .project-image {
@@ -716,7 +721,8 @@ body {
         background: var(--card-bg) !important;
         border: 1px solid var(--card-border) !important;
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: none !important;
+        visibility: visible !important;
     }
 
     .social-icon {
@@ -763,11 +769,13 @@ body {
 
     .project-card {
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: none !important;
+        visibility: visible !important;
     }
 
     .social-card {
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: none !important;
+        visibility: visible !important;
     }
 }
