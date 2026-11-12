@@ -569,6 +569,12 @@ body {
     height: 30px;
 }
 
+.social-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
 .social-name {
     font-weight: 600;
     color: var(--text-primary);
