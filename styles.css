@@ -554,6 +554,11 @@ body {
     box-shadow: 0 20px 40px rgba(230, 0, 18, 0.3);
 }
 
+.social-card.spotify:hover {
+    border-color: #1db954;
+    box-shadow: 0 20px 40px rgba(29, 185, 84, 0.3);
+}
+
 .social-icon {
     width: 60px;
     height: 60px;
