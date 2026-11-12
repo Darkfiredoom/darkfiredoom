@@ -549,6 +549,11 @@ body {
     box-shadow: 0 20px 40px rgba(23, 26, 33, 0.3);
 }
 
+.social-card.nintendo:hover {
+    border-color: #e60012;
+    box-shadow: 0 20px 40px rgba(230, 0, 18, 0.3);
+}
+
 .social-icon {
     width: 60px;
     height: 60px;
