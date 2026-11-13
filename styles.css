@@ -271,12 +271,85 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0.75rem 0;
-    padding: 0.4rem 0.8rem;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--accent-primary);
+    border-radius: 12px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.discord-status:hover {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 4px 20px rgba(243, 156, 18, 0.3);
+}
+
+.twitch-widget {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.5rem 0;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, rgba(145, 70, 255, 0.8), rgba(100, 65, 165, 0.8));
+    border: 2px solid #9146ff;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(145, 70, 255, 0.4);
+    animation: twitch-pulse 2s infinite;
+}
+
+@keyframes twitch-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(145, 70, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(145, 70, 255, 0.6);
+    }
+}
+
+.twitch-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff0000;
+    animation: live-pulse 1.5s infinite;
+    flex-shrink: 0;
+}
+
+@keyframes live-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.twitch-text {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    flex: 1;
+}
+
+.twitch-link {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.twitch-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .status-indicator {

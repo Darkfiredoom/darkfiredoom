@@ -132,7 +132,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchDiscordStatus();
+    fetchTwitchStatus();
 });
+
+// Twitch Status Fetcher
+async function fetchTwitchStatus() {
+    const twitchUsername = 'darkfired00m';
+    const twitchIndicator = document.getElementById('twitch-indicator');
+    const twitchWidget = document.getElementById('twitch-widget');
+    
+    try {
+        // Using a free API to check Twitch stream status
+        const response = await fetch(`https://decapi.me/twitch/uptime/${twitchUsername}`);
+        const data = await response.text();
+        
+        if (data && !data.includes('offline') && !data.includes('not live')) {
+            // Stream is live
+            if (twitchWidget) {
+                twitchWidget.style.display = 'flex';
+                const twitchText = document.getElementById('twitch-text');
+                if (twitchText) {
+                    twitchText.innerHTML = `🔴 LIVE on Twitch: ${data}`;
+                }
+            }
+        } else {
+            // Stream is offline
+            if (twitchWidget) {
+                twitchWidget.style.display = 'none';
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching Twitch status:', error);
+        if (twitchWidget) {
+            twitchWidget.style.display = 'none';
+        }
+    }
+}
 
 // Discord Status Fetcher
 async function fetchDiscordStatus() {
