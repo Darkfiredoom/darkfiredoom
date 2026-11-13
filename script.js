@@ -197,7 +197,7 @@ async function fetchDiscordStatus() {
             // Update status indicator
             statusIndicator.className = 'status-indicator ' + status;
             
-            // Build status text with cleaner display
+            // Build status text with multiline display
             let statusMessage = '';
             
             if (status === 'online') {
@@ -210,22 +210,29 @@ async function fetchDiscordStatus() {
                 statusMessage = 'Offline';
             }
             
-            // Add primary activity (first one only, cleaner display)
+            // Add activity details on separate lines
             if (activities && activities.length > 0) {
                 const activity = activities[0];
                 
                 if (activity.type === 0) {
                     // Playing a game
                     statusMessage = `Playing ${parseEmojis(activity.name)}`;
+                    if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
+                    if (activity.state) statusMessage += `\n${parseEmojis(activity.state)}`;
                 } else if (activity.type === 1) {
                     // Streaming
                     statusMessage = `Streaming ${parseEmojis(activity.name)}`;
+                    if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
                 } else if (activity.type === 2) {
                     // Listening to music
                     statusMessage = `Listening to ${parseEmojis(activity.name)}`;
+                    if (activity.details && activity.state) {
+                        statusMessage += `\n${parseEmojis(activity.details)} by ${parseEmojis(activity.state)}`;
+                    }
                 } else if (activity.type === 3) {
                     // Watching
                     statusMessage = `Watching ${parseEmojis(activity.name)}`;
+                    if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
                 } else if (activity.type === 4) {
                     // Custom status
                     statusMessage = parseEmojis(activity.state || activity.name);
