@@ -153,7 +153,7 @@ async function fetchTwitchStatus() {
                 twitchWidget.style.display = 'block';
                 const twitchText = document.getElementById('twitch-text');
                 if (twitchText) {
-                    twitchText.innerHTML = `🔴 LIVE on Twitch: ${data}`;
+                    twitchText.innerHTML = `LIVE on Twitch: ${data}`;
                 }
                 // Set the embed iframe src
                 if (twitchEmbed) {
@@ -197,52 +197,42 @@ async function fetchDiscordStatus() {
             // Update status indicator
             statusIndicator.className = 'status-indicator ' + status;
             
-            // Build status text with full details
-            let statusMessage = 'Discord Status: ';
+            // Build status text with cleaner display
+            let statusMessage = '';
             
             if (status === 'online') {
-                statusMessage += 'Online';
+                statusMessage = 'Online';
             } else if (status === 'idle') {
-                statusMessage += 'Idle';
+                statusMessage = 'Idle';
             } else if (status === 'dnd') {
-                statusMessage += 'Do Not Disturb';
+                statusMessage = 'Do Not Disturb';
             } else {
-                statusMessage += 'Offline';
+                statusMessage = 'Offline';
             }
             
-            // Add activities with full details
+            // Add primary activity (first one only, cleaner display)
             if (activities && activities.length > 0) {
-                statusMessage += '\n';
-                activities.forEach((activity, index) => {
-                    if (index > 0) statusMessage += '\n';
-                    
-                    if (activity.type === 0) {
-                        // Playing a game
-                        statusMessage += `Playing ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
-                        if (activity.state) statusMessage += `\n(${parseEmojis(activity.state)})`;
-                    } else if (activity.type === 1) {
-                        // Streaming
-                        statusMessage += `Streaming ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
-                    } else if (activity.type === 2) {
-                        // Listening to music
-                        statusMessage += `Listening to ${parseEmojis(activity.name)}`;
-                        if (activity.details && activity.state) {
-                            statusMessage += `\n${parseEmojis(activity.details)} by ${parseEmojis(activity.state)}`;
-                        }
-                    } else if (activity.type === 3) {
-                        // Watching
-                        statusMessage += `Watching ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
-                    } else if (activity.type === 4) {
-                        // Custom status
-                        statusMessage += parseEmojis(activity.state || activity.name);
-                    } else if (activity.type === 5) {
-                        // Competing
-                        statusMessage += `Competing in ${parseEmojis(activity.name)}`;
-                    }
-                });
+                const activity = activities[0];
+                
+                if (activity.type === 0) {
+                    // Playing a game
+                    statusMessage = `Playing ${parseEmojis(activity.name)}`;
+                } else if (activity.type === 1) {
+                    // Streaming
+                    statusMessage = `Streaming ${parseEmojis(activity.name)}`;
+                } else if (activity.type === 2) {
+                    // Listening to music
+                    statusMessage = `Listening to ${parseEmojis(activity.name)}`;
+                } else if (activity.type === 3) {
+                    // Watching
+                    statusMessage = `Watching ${parseEmojis(activity.name)}`;
+                } else if (activity.type === 4) {
+                    // Custom status
+                    statusMessage = parseEmojis(activity.state || activity.name);
+                } else if (activity.type === 5) {
+                    // Competing
+                    statusMessage = `Competing in ${parseEmojis(activity.name)}`;
+                }
             }
             
             statusText.innerHTML = statusMessage;
