@@ -287,8 +287,8 @@ body {
 }
 
 .twitch-widget {
-    display: flex;
-    align-items: center;
+    display: none;
+    flex-direction: column;
     gap: 0.75rem;
     margin: 0.5rem 0;
     padding: 0.6rem 1rem;
@@ -298,6 +298,12 @@ body {
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(145, 70, 255, 0.4);
     animation: twitch-pulse 2s infinite;
+}
+
+.twitch-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 @keyframes twitch-pulse {
@@ -352,6 +358,20 @@ body {
     transform: translateY(-1px);
 }
 
+.twitch-embed-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+}
+
+.twitch-embed-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 .status-indicator {
     width: 10px;
     height: 10px;
@@ -390,7 +410,9 @@ body {
     color: var(--text-secondary);
     font-size: 0.8rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .discord-emoji {

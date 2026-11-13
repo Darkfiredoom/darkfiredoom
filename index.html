@@ -40,9 +40,21 @@
                 <div class="status-text" id="status-text">Loading status...</div>
             </div>
             <div class="twitch-widget" id="twitch-widget" style="display: none;">
-                <div class="twitch-indicator" id="twitch-indicator"></div>
-                <div class="twitch-text" id="twitch-text"></div>
-                <a href="https://www.twitch.tv/darkfired00m" target="_blank" class="twitch-link">Watch Stream →</a>
+                <div class="twitch-header">
+                    <div class="twitch-indicator" id="twitch-indicator"></div>
+                    <div class="twitch-text" id="twitch-text"></div>
+                    <a href="https://www.twitch.tv/darkfired00m" target="_blank" class="twitch-link">Watch Stream →</a>
+                </div>
+                <div class="twitch-embed-container">
+                    <iframe
+                        id="twitch-embed"
+                        src=""
+                        frameborder="0"
+                        allowfullscreen="true"
+                        scrolling="no"
+                        allow="autoplay; fullscreen">
+                    </iframe>
+                </div>
             </div>
             <div class="hero-scroll">
                 <span>Scroll to explore</span>

@@ -140,6 +140,7 @@ async function fetchTwitchStatus() {
     const twitchUsername = 'darkfired00m';
     const twitchIndicator = document.getElementById('twitch-indicator');
     const twitchWidget = document.getElementById('twitch-widget');
+    const twitchEmbed = document.getElementById('twitch-embed');
     
     try {
         // Using a free API to check Twitch stream status
@@ -149,16 +150,23 @@ async function fetchTwitchStatus() {
         if (data && !data.includes('offline') && !data.includes('not live')) {
             // Stream is live
             if (twitchWidget) {
-                twitchWidget.style.display = 'flex';
+                twitchWidget.style.display = 'block';
                 const twitchText = document.getElementById('twitch-text');
                 if (twitchText) {
                     twitchText.innerHTML = `🔴 LIVE on Twitch: ${data}`;
+                }
+                // Set the embed iframe src
+                if (twitchEmbed) {
+                    twitchEmbed.src = `https://player.twitch.tv/?channel=${twitchUsername}&parent=${window.location.hostname}&muted=true`;
                 }
             }
         } else {
             // Stream is offline
             if (twitchWidget) {
                 twitchWidget.style.display = 'none';
+                if (twitchEmbed) {
+                    twitchEmbed.src = '';
+                }
             }
         }
     } catch (error) {
@@ -204,29 +212,29 @@ async function fetchDiscordStatus() {
             
             // Add activities with full details
             if (activities && activities.length > 0) {
-                statusMessage += ' - ';
+                statusMessage += '\n';
                 activities.forEach((activity, index) => {
-                    if (index > 0) statusMessage += ' | ';
+                    if (index > 0) statusMessage += '\n';
                     
                     if (activity.type === 0) {
                         // Playing a game
                         statusMessage += `Playing ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += ` - ${parseEmojis(activity.details)}`;
-                        if (activity.state) statusMessage += ` (${parseEmojis(activity.state)})`;
+                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
+                        if (activity.state) statusMessage += `\n(${parseEmojis(activity.state)})`;
                     } else if (activity.type === 1) {
                         // Streaming
                         statusMessage += `Streaming ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += ` - ${parseEmojis(activity.details)}`;
+                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
                     } else if (activity.type === 2) {
                         // Listening to music
                         statusMessage += `Listening to ${parseEmojis(activity.name)}`;
                         if (activity.details && activity.state) {
-                            statusMessage += ` - ${parseEmojis(activity.details)} by ${parseEmojis(activity.state)}`;
+                            statusMessage += `\n${parseEmojis(activity.details)} by ${parseEmojis(activity.state)}`;
                         }
                     } else if (activity.type === 3) {
                         // Watching
                         statusMessage += `Watching ${parseEmojis(activity.name)}`;
-                        if (activity.details) statusMessage += ` - ${parseEmojis(activity.details)}`;
+                        if (activity.details) statusMessage += `\n${parseEmojis(activity.details)}`;
                     } else if (activity.type === 4) {
                         // Custom status
                         statusMessage += parseEmojis(activity.state || activity.name);
